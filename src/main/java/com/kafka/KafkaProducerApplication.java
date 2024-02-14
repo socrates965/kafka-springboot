@@ -77,16 +77,22 @@ public class KafkaProducerApplication {
 	
 			// Send the message to the Kafka topic
 			ProducerRecord<Integer, String> record = new ProducerRecord<>(topic, null, message);
-			producer.send(record, (metadata, exception) -> {
-				if (exception == null) {
-					LOGGER.debug("Message sent successfully! Offset: " + metadata.offset());
-				} else {
-					LOGGER.error("Error sending message: " + exception.getMessage());
-				}
-			});
+			while (true) {
+				producer.send(record, (metadata, exception) -> {
+					if (exception == null) {
+						LOGGER.debug("Message sent successfully! Offset: " + metadata.offset());
+					} else {
+						LOGGER.error("Error sending message: " + exception.getMessage());
+					}
+				});
+
+				// reduce the speed of loop
+				Thread.sleep(2000);
+				
+				// Close the producer
+				// producer.close();
+			}
 	
-			// Close the producer
-			producer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
