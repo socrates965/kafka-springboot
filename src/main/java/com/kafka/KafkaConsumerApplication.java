@@ -71,7 +71,7 @@ public class KafkaConsumerApplication {
 			while (true) {
 			    ConsumerRecords<String, String> records = consumer.poll(Duration.ofMillis(100));
 			    for (ConsumerRecord<String, String> record : records) {
-			        LOGGER.debug("offset = %d, key = %s, value = %s%n", record.offset(), record.key(), record.value());
+			        LOGGER.debug("offset = " + record.offset() + " , key = " +record.key() + " , value = " + record.value());
 			    }
 			}
 		}catch (Exception e) {
