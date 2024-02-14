@@ -36,7 +36,7 @@ public class KafkaProducerApplication {
 		String kafkaServer = "localhost:9092";
 		String kafkaUserName = "";
 		String kafkaPassword = "";
-		String topic = "my-topic";
+		String topic = "test";
 
 		props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServer);
 		props.put(ProducerConfig.RETRIES_CONFIG, "1000");
